@@ -1,6 +1,6 @@
 {
   "name": "truthlens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Open-source browser extension that flags AI-generated text, deepfake images, and cloned audio in real time. On-device, privacy-first AI detector.",
   "type": "module",
   "scripts": {

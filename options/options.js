@@ -3,7 +3,7 @@ const defaults = {
   flagText: true,
   flagImages: true,
   flagAudio: true,
-  minTextLength: 200,
+  minTextLength: 120,
   showInlineBadges: true,
   showOverlay: true
 };
@@ -28,7 +28,7 @@ function save() {
     flagAudio: document.getElementById("flagAudio").checked,
     showInlineBadges: document.getElementById("showInlineBadges").checked,
     showOverlay: document.getElementById("showOverlay").checked,
-    minTextLength: Math.max(80, Math.min(2000, parseInt(document.getElementById("minTextLength").value, 10) || 200))
+    minTextLength: Math.max(80, Math.min(2000, parseInt(document.getElementById("minTextLength").value, 10) || 120))
   };
   chrome.storage.sync.set(next, () => {
     const s = document.getElementById("status");

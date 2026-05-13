@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "TruthLens — AI Toxicity & Synthetic Media Detector",
   "short_name": "TruthLens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Free AI detector: flags ChatGPT/GPT-4/Claude/Gemini text, Midjourney/DALL·E/Stable Diffusion deepfake images, and cloned voices in real time. Open-source, on-device, zero telemetry.",
   "author": "TruthLens Contributors",
   "homepage_url": "https://github.com/mrtomdev/truthlens",

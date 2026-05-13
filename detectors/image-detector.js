@@ -97,35 +97,63 @@ export async function deepAnalyze(imgElement) {
   };
 }
 
+async function loadAnonymous(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("anonymous load failed"));
+    img.src = src;
+  });
+}
+
 async function analyzePixels(imgElement) {
   if (!imgElement.complete || imgElement.naturalWidth === 0) {
     return { error: "image not loaded" };
   }
 
   const MAX = 256;
-  const w = imgElement.naturalWidth;
-  const h = imgElement.naturalHeight;
-  const scale = Math.min(1, MAX / Math.max(w, h));
-  const cw = Math.max(16, Math.round(w * scale));
-  const ch = Math.max(16, Math.round(h * scale));
-
-  const canvas = new OffscreenCanvas(cw, ch);
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return { error: "no canvas context" };
-
-  try {
+  const drawSource = async () => {
+    const w = imgElement.naturalWidth;
+    const h = imgElement.naturalHeight;
+    const scale = Math.min(1, MAX / Math.max(w, h));
+    const cw = Math.max(16, Math.round(w * scale));
+    const ch = Math.max(16, Math.round(h * scale));
+    const canvas = new OffscreenCanvas(cw, ch);
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) throw new Error("no canvas context");
     ctx.drawImage(imgElement, 0, 0, cw, ch);
-  } catch (err) {
-    // Cross-origin taint — can't read pixels. Skip silently.
-    return { error: "cross-origin (CORS) — pixel data unreadable" };
+    return { data: ctx.getImageData(0, 0, cw, ch).data, cw, ch };
+  };
+
+  let out;
+  try {
+    out = await drawSource();
+  } catch {
+    // Likely CORS-tainted. Retry with an anonymous load of the same URL.
+    const src = imgElement.currentSrc || imgElement.src;
+    if (!src) return { error: "no src" };
+    try {
+      const fresh = await loadAnonymous(src);
+      const w = fresh.naturalWidth;
+      const h = fresh.naturalHeight;
+      const scale = Math.min(1, MAX / Math.max(w, h));
+      const cw = Math.max(16, Math.round(w * scale));
+      const ch = Math.max(16, Math.round(h * scale));
+      const canvas = new OffscreenCanvas(cw, ch);
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      if (!ctx) return { error: "no canvas context" };
+      ctx.drawImage(fresh, 0, 0, cw, ch);
+      out = { data: ctx.getImageData(0, 0, cw, ch).data, cw, ch };
+    } catch {
+      return { error: "cross-origin (CORS) — pixel data unreadable" };
+    }
   }
 
-  const data = ctx.getImageData(0, 0, cw, ch).data;
-
   return {
-    highFreqEnergy: estimateHighFreqEnergy(data, cw, ch),
-    colorEntropy: estimateColorEntropy(data),
-    noiseUniformity: estimateNoiseUniformity(data, cw, ch)
+    highFreqEnergy: estimateHighFreqEnergy(out.data, out.cw, out.ch),
+    colorEntropy: estimateColorEntropy(out.data),
+    noiseUniformity: estimateNoiseUniformity(out.data, out.cw, out.ch)
   };
 }
 

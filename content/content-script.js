@@ -51,7 +51,7 @@
           flagText: true,
           flagImages: true,
           flagAudio: true,
-          minTextLength: 200,
+          minTextLength: 120,
           showInlineBadges: true,
           showOverlay: true
         },
@@ -135,25 +135,38 @@
   }
 
   function collectTextBlocks(minChars) {
-    const candidates = document.querySelectorAll(
-      "article, [role=article], main p, main li, .post, .entry, .content p, .story-body p, .article-body p, blockquote"
-    );
-    const seen = new WeakSet();
     const out = [];
-    candidates.forEach(el => {
-      if (seen.has(el)) return;
+    const seen = new WeakSet();
+    const push = (el) => {
+      if (!el || seen.has(el)) return;
       seen.add(el);
-      const txt = (el.innerText || "").trim();
+      const txt = (el.innerText || el.textContent || "").trim();
       if (txt.length >= minChars && isVisible(el)) out.push(el);
-    });
-    if (out.length === 0) {
-      document.querySelectorAll("p").forEach(p => {
-        const t = (p.innerText || "").trim();
-        if (t.length >= minChars && isVisible(p)) out.push(p);
+    };
+
+    // Pass 1: semantic article containers (news, blogs).
+    document.querySelectorAll(
+      "article, [role=article], main p, main li, .post, .entry, .content p, .story-body p, .article-body p, blockquote"
+    ).forEach(push);
+
+    // Pass 2: known LLM chat UIs (ChatGPT, Claude, Gemini, Perplexity, Poe, Copilot).
+    document.querySelectorAll(
+      "[data-message-author-role], [data-testid^='conversation-turn'], " +
+      "[data-message-id], .markdown.prose, .prose, " +
+      "[class*='message-content'], [class*='MessageContent'], " +
+      "[class*='chat-message'], [class*='ChatMessage'], " +
+      ".model-response-text, message-content"
+    ).forEach(push);
+
+    // Pass 3: every paragraph + long div on the page.
+    if (out.length < 3) {
+      document.querySelectorAll("p, li, div").forEach(el => {
+        if (el.children.length > 6) return; // skip layout containers
+        push(el);
       });
     }
-    // Cap to avoid thrashing huge pages.
-    return out.slice(0, 40);
+
+    return out.slice(0, 60);
   }
 
   function isVisible(el) {
