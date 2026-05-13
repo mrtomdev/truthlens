@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TruthLens</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">TL</div>
+      <div>
+        <h1>TruthLens</h1>
+        <p>AI Toxicity &amp; Synthetic Media Detector</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <button id="scan" class="primary">Scan this page</button>
+
+    <section class="card" id="result">
+      <h2>This page</h2>
+      <div class="grid">
+        <div class="stat"><b id="cText">—</b><span>Text</span></div>
+        <div class="stat"><b id="cImage">—</b><span>Images</span></div>
+        <div class="stat"><b id="cAudio">—</b><span>Audio</span></div>
+      </div>
+      <p id="hint" class="hint">Click <em>Scan this page</em> to analyse visible content.</p>
+    </section>
+
+    <section class="card">
+      <h2>Lifetime</h2>
+      <div class="grid">
+        <div class="stat"><b id="gScans">0</b><span>Scans</span></div>
+        <div class="stat"><b id="gFlags">0</b><span>Flagged</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="#" id="openOptions">Settings</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://github.com/mrtomdev/truthlens" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
