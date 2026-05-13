@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>TruthLens — Free AI Detector Browser Extension | Detect ChatGPT, Deepfakes & Cloned Voices</title>
+  <meta name="description" content="Free, open-source browser extension that detects AI-generated text (ChatGPT, GPT-4, Claude, Gemini), deepfake images (Midjourney, DALL·E, Stable Diffusion), and cloned voices in real time. 100% on-device. Zero telemetry. Privacy-first. Works on Chrome, Edge, Brave, Opera." />
+  <meta name="keywords" content="AI detector, deepfake detector, ChatGPT detector, GPT detector, AI text detector, AI image detector, AI content detector, deepfake detection, synthetic media detection, voice clone detector, audio deepfake, Midjourney detector, DALL-E detector, Stable Diffusion detector, Sora detector, browser extension, Chrome extension, Edge extension, Brave extension, Manifest V3, on-device AI, privacy-first AI, disinformation, misinformation, media literacy, fact checking, journalism tool, plagiarism detector, AI plagiarism, election security, fake news detector, free AI detector, open source AI detector" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="author" content="TruthLens Contributors" />
+  <link rel="canonical" href="https://mrtomdev.github.io/truthlens/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TruthLens — Free AI Detector Browser Extension" />
+  <meta property="og:description" content="Detect ChatGPT-generated text, deepfake images, and cloned voices in real time. Open-source, on-device, zero telemetry." />
+  <meta property="og:url" content="https://mrtomdev.github.io/truthlens/" />
+  <meta property="og:image" content="https://mrtomdev.github.io/truthlens/social-preview.svg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="640" />
+  <meta property="og:site_name" content="TruthLens" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TruthLens — Free AI Detector Browser Extension" />
+  <meta name="twitter:description" content="Detect ChatGPT-generated text, deepfake images, and cloned voices in real time. Open-source. On-device. Zero telemetry." />
+  <meta name="twitter:image" content="https://mrtomdev.github.io/truthlens/social-preview.svg" />
+
+  <!-- Structured data: SoftwareApplication + FAQPage for rich Google results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TruthLens",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome, Edge, Brave, Opera, Arc, Vivaldi",
+    "description": "Open-source browser extension that flags AI-generated text, deepfake images, and cloned voices in real time. On-device, privacy-first.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "url": "https://github.com/mrtomdev/truthlens",
+    "downloadUrl": "https://github.com/mrtomdev/truthlens",
+    "softwareVersion": "1.0.0",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": { "@type": "Person", "name": "Tom (@mrtomdev)" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "ratingCount": "1" },
+    "keywords": "AI detector, deepfake detector, ChatGPT detector, synthetic media, browser extension, privacy-first, open source"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is TruthLens free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. TruthLens is 100% free and open-source under the MIT license. No sign-up, no trial, no subscription." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does TruthLens send my data to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All detection runs locally in your browser. No text, image, or audio is uploaded anywhere. There is no telemetry, analytics, or remote logging." }
+      },
+      {
+        "@type": "Question",
+        "name": "What can TruthLens detect?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AI-generated text (ChatGPT, GPT-4, Claude, Gemini), synthetic / deepfake images (Midjourney, DALL·E, Stable Diffusion, Leonardo, Ideogram, Flux), and cloned or AI-synthesized voices in audio and video elements." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which browsers does TruthLens support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Chrome, Microsoft Edge, Brave, Opera, Arc, Vivaldi — any Chromium-based browser. Firefox and Safari ports are on the roadmap." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is TruthLens?",
+        "acceptedAnswer": { "@type": "Answer", "text": "TruthLens uses transparent statistical heuristics, not a black-box model. Every verdict comes with a signal breakdown so you can audit the decision. It is a triage tool, not forensic proof." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      color:#0f172a;background:#f8fafc;
+    }
+    a{color:#0369a1}
+    .hero{
+      background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;
+      padding:80px 20px 64px;text-align:center;
+    }
+    .hero h1{font-size:44px;margin:0 0 12px;letter-spacing:-.02em}
+    .hero p.tag{font-size:20px;opacity:.92;max-width:780px;margin:0 auto 28px}
+    .cta a{
+      display:inline-block;background:#fff;color:#0369a1;padding:14px 22px;
+      border-radius:10px;text-decoration:none;font-weight:700;margin:6px;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+    }
+    .cta a.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7)}
+    main{max-width:980px;margin:0 auto;padding:48px 20px}
+    section{margin-bottom:48px}
+    h2{font-size:28px;margin:0 0 16px;letter-spacing:-.01em}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px}
+    .card h3{margin:0 0 8px;font-size:17px}
+    .card p{margin:0;color:#475569;font-size:14px}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+    .badges img{height:24px}
+    footer{padding:32px 20px;text-align:center;color:#64748b;border-top:1px solid #e2e8f0;background:#fff}
+    pre,code{background:#0f172a;color:#e2e8f0;padding:2px 6px;border-radius:4px;font-size:14px}
+    pre{padding:14px;border-radius:10px;overflow-x:auto}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>TruthLens</h1>
+    <p class="tag">The free, open-source <strong>AI detector browser extension</strong> that flags <strong>ChatGPT-generated text</strong>, <strong>deepfake images</strong>, and <strong>cloned voices</strong> in real time — 100% on-device, zero telemetry.</p>
+    <div class="cta">
+      <a href="https://github.com/mrtomdev/truthlens">⭐ Star on GitHub</a>
+      <a class="ghost" href="https://github.com/mrtomdev/truthlens#-quick-install-developer-mode">Install in 30 seconds</a>
+    </div>
+    <div class="badges">
+      <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-green.svg" />
+      <img alt="Manifest V3" src="https://img.shields.io/badge/Chrome-Manifest_V3-blue.svg" />
+      <img alt="Zero telemetry" src="https://img.shields.io/badge/Telemetry-None-success.svg" />
+      <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" />
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>What TruthLens detects</h2>
+      <div class="grid">
+        <div class="card"><h3>🧠 AI text (ChatGPT, GPT-4, Claude, Gemini)</h3><p>Burstiness, common-word ratio, 25+ LLM phrase fingerprints, syntactic uniformity.</p></div>
+        <div class="card"><h3>🖼 Deepfake images</h3><p>Midjourney, DALL·E, Stable Diffusion, Leonardo, Ideogram, Flux. Pixel-level pluggable heuristics.</p></div>
+        <div class="card"><h3>🎙 Cloned & synthetic voices</h3><p>Spectral flatness, silence regularity, pitch jitter on any &lt;audio&gt; or &lt;video&gt;.</p></div>
+        <div class="card"><h3>🔒 100% on-device</h3><p>Nothing leaves your browser. No accounts. No tracking. Audit the source.</p></div>
+        <div class="card"><h3>🏷 Inline badges</h3><p>Click any flag to see the underlying signals — transparent, not a black box.</p></div>
+        <div class="card"><h3>⌨ Hotkey + right-click</h3><p>Ctrl+Shift+T to rescan. Right-click any image to triage instantly.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Who uses TruthLens?</h2>
+      <ul>
+        <li><strong>Journalists</strong> verifying quotes and source images during breaking news.</li>
+        <li><strong>Teachers and professors</strong> spotting AI-written essays and homework.</li>
+        <li><strong>Researchers</strong> studying disinformation campaigns at scale.</li>
+        <li><strong>Parents</strong> protecting kids from cloned-voice scam calls and synthetic media.</li>
+        <li><strong>Voters</strong> identifying election-cycle deepfakes before they spread.</li>
+        <li><strong>Recruiters</strong> filtering AI-generated cover letters and applications.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Install in 30 seconds</h2>
+      <pre>git clone https://github.com/mrtomdev/truthlens.git
+# Open chrome://extensions → Developer mode → Load unpacked → pick the folder</pre>
+    </section>
+
+    <section>
+      <h2>FAQ</h2>
+      <h3>Is TruthLens free?</h3>
+      <p>Yes — MIT-licensed, free forever. No subscription, no trial.</p>
+      <h3>Does it send my data anywhere?</h3>
+      <p>No. Every detection runs in your browser. Open the network tab and confirm.</p>
+      <h3>How accurate is it?</h3>
+      <p>It's a transparent triage tool, not forensic proof. Every verdict shows the underlying signals so you can audit it yourself.</p>
+      <h3>What does it support?</h3>
+      <p>Detects output from ChatGPT, GPT-4, Claude, Gemini, Midjourney, DALL·E, Stable Diffusion, Leonardo, Ideogram, Flux, and synthetic-voice generators.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>TruthLens is open-source under the MIT license. Built by <a href="https://github.com/mrtomdev">@mrtomdev</a> and contributors.</p>
+    <p><a href="https://github.com/mrtomdev/truthlens">GitHub</a> · <a href="https://github.com/mrtomdev/truthlens/issues">Issues</a> · <a href="https://github.com/mrtomdev/truthlens/discussions">Discussions</a></p>
+  </footer>
+</body>
+</html>

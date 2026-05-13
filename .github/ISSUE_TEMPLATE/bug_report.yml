@@ -1,0 +1,26 @@
+name: 🐛 Bug report
+description: Report a problem with TruthLens (the AI detector browser extension)
+labels: [bug]
+body:
+  - type: input
+    id: browser
+    attributes:
+      label: Browser + version
+      placeholder: "Chrome 142.0.7340.81 on Windows 11"
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page URL where it happened (optional)
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Include the full signal breakdown from the badge popover if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
