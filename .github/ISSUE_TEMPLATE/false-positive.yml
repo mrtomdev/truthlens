@@ -1,0 +1,21 @@
+name: ⚠️ False positive (human text flagged as AI)
+description: Help us improve the detector — share content that was wrongly flagged
+labels: [false-positive, detector-quality]
+body:
+  - type: textarea
+    id: content
+    attributes:
+      label: The content that was wrongly flagged
+      description: Paste the text, or describe the image / audio.
+    validations:
+      required: true
+  - type: textarea
+    id: signals
+    attributes:
+      label: Which signals fired? (from the popover)
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source / author (if known)

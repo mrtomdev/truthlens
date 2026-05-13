@@ -1,0 +1,125 @@
+/* TruthLens overlay styles — namespaced to avoid host-page conflicts */
+
+.truthlens-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 600 11px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+  padding: 3px 7px !important;
+  border-radius: 6px !important;
+  margin: 0 6px 0 0 !important;
+  vertical-align: middle !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.15) !important;
+  z-index: 2147483646 !important;
+  color: #111 !important;
+  letter-spacing: 0.02em;
+}
+
+.truthlens-badge.truthlens-likely-ai,
+.truthlens-badge.truthlens-likely-synthetic {
+  background: #ffe1e1 !important;
+  color: #8a1212 !important;
+  border: 1px solid #f5a3a3 !important;
+}
+
+.truthlens-badge.truthlens-possibly-ai,
+.truthlens-badge.truthlens-possibly-synthetic {
+  background: #fff3cd !important;
+  color: #6b4a00 !important;
+  border: 1px solid #f1d27a !important;
+}
+
+.truthlens-img-wrap {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.truthlens-img-wrap > .truthlens-badge {
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+  margin: 0 !important;
+}
+
+.truthlens-overlay {
+  position: fixed !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  width: 240px !important;
+  background: #ffffff !important;
+  color: #111 !important;
+  border: 1px solid #d8dde6 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .18) !important;
+  font: 13px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+  z-index: 2147483647 !important;
+  overflow: hidden !important;
+}
+.truthlens-overlay header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 12px !important;
+  background: linear-gradient(180deg, #0ea5e9, #0369a1) !important;
+  color: #fff !important;
+}
+.truthlens-overlay .brand { font-weight: 700 !important; letter-spacing: 0.02em; }
+.truthlens-overlay button {
+  background: transparent !important;
+  border: 0 !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  padding: 2px 6px !important;
+}
+.truthlens-overlay .counts {
+  display: flex !important;
+  justify-content: space-around !important;
+  padding: 10px 8px !important;
+  border-bottom: 1px solid #eef1f6 !important;
+}
+.truthlens-overlay .counts b { display: block; font-size: 18px; }
+.truthlens-overlay .hint {
+  margin: 8px 12px 10px !important;
+  color: #475569 !important;
+  font-size: 12px !important;
+}
+.truthlens-overlay.min .counts,
+.truthlens-overlay.min .hint { display: none !important; }
+
+.truthlens-popover {
+  position: absolute !important;
+  max-width: 320px !important;
+  min-width: 240px !important;
+  background: #fff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .18) !important;
+  padding: 10px 12px !important;
+  font: 12px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+  z-index: 2147483647 !important;
+}
+.truthlens-popover .head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px;
+}
+.truthlens-popover .title { font-weight: 700; }
+.truthlens-popover .close {
+  background: none; border: 0; cursor: pointer; font-size: 18px; line-height: 1;
+}
+.truthlens-popover .verdict {
+  font-weight: 700; margin: 4px 0; color: #b45309;
+}
+.truthlens-popover .reason { color: #334155; margin: 4px 0 8px; }
+.truthlens-popover .signals .row {
+  display: flex; justify-content: space-between;
+  padding: 2px 0; border-bottom: 1px dashed #e2e8f0;
+}
+.truthlens-popover .foot {
+  margin-top: 8px; padding-top: 6px; border-top: 1px solid #e2e8f0;
+  color: #64748b; font-size: 11px;
+}

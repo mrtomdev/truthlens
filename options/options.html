@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TruthLens — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>TruthLens Settings</h1>
+      <p>Configure how TruthLens scans pages. All detection runs locally in your browser — no data leaves your device.</p>
+    </header>
+
+    <section>
+      <h2>Auto-scan</h2>
+      <label class="row"><input id="autoScan" type="checkbox" /> Scan pages automatically when they load</label>
+    </section>
+
+    <section>
+      <h2>What to flag</h2>
+      <label class="row"><input id="flagText" type="checkbox" /> AI-generated text</label>
+      <label class="row"><input id="flagImages" type="checkbox" /> Synthetic / deepfake images</label>
+      <label class="row"><input id="flagAudio" type="checkbox" /> Cloned voices and synthetic audio</label>
+    </section>
+
+    <section>
+      <h2>Display</h2>
+      <label class="row"><input id="showInlineBadges" type="checkbox" /> Show inline badges next to flagged content</label>
+      <label class="row"><input id="showOverlay" type="checkbox" /> Show floating summary overlay</label>
+    </section>
+
+    <section>
+      <h2>Text detection</h2>
+      <label class="row">
+        Minimum text length (characters):
+        <input id="minTextLength" type="number" min="80" max="2000" step="10" />
+      </label>
+      <p class="note">Shorter passages are too small to score reliably.</p>
+    </section>
+
+    <div class="actions">
+      <button id="save" class="primary">Save</button>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+
+    <footer>
+      <p>
+        TruthLens is open-source and built for transparency. The detection
+        signals are documented in the
+        <a href="https://github.com/mrtomdev/truthlens" target="_blank" rel="noopener">project README</a>.
+      </p>
+    </footer>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

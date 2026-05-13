@@ -1,0 +1,21 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.zip
+*.crx
+*.pem
+dist/
+build/
+.idea/
+.vscode/
+*.log
+.env
+.env.local
+
+# local automation helpers (not part of the public repo)
+.create-release.py
+.push-seo.py
+.release-body.txt
+.seo-repo.json
+.seo-topics.json
+generate-icons.cjs

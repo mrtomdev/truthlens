@@ -1,0 +1,3 @@
+If you point a custom domain at the Pages site (e.g., truthlens.io),
+create a file called CNAME (no extension) in the docs/ folder containing
+just the domain — and remove this placeholder.

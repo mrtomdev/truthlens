@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+title: "TruthLens — AI Toxicity & Synthetic Media Detector"
+message: "If you use TruthLens in research, journalism, or education, please cite it."
+type: software
+authors:
+  - given-names: Tom
+    family-names: "(mrtomdev)"
+    alias: mrtomdev
+repository-code: "https://github.com/mrtomdev/truthlens"
+url: "https://mrtomdev.github.io/truthlens/"
+abstract: >-
+  TruthLens is an open-source, on-device browser extension that detects
+  AI-generated text (ChatGPT, GPT-4, Claude, Gemini), deepfake images
+  (Midjourney, DALL-E, Stable Diffusion, Leonardo, Ideogram, Flux), and
+  cloned voices in real time. It runs entirely in the browser with zero
+  telemetry, exposing transparent statistical signals rather than a
+  black-box score.
+keywords:
+  - AI detector
+  - deepfake detector
+  - ChatGPT detector
+  - synthetic media detection
+  - voice clone detection
+  - browser extension
+  - Manifest V3
+  - privacy-first
+  - disinformation
+  - media literacy
+license: MIT
+version: 1.0.0
+date-released: 2026-05-13
